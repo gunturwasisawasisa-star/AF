@@ -1,0 +1,369 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spesial Untuk Aisah Fadilah</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display (Elegant) & Quicksand (Soft/Cute) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffd6e8 100%);
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Efek kelopak bunga/hati berguguran */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative">
+
+    <!-- Kontainer Partikel Hati -->
+    <div id="heart-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- TAMPILAN 1: Verifikasi Nama (Gerbang Masuk) -->
+    <div id="screen-verify" class="w-full max-w-md bg-white/85 backdrop-blur-md p-8 rounded-3xl shadow-2xl text-center border border-pink-200 z-10 transition-all duration-700">
+        <div class="text-6xl mb-4 animate-bounce">💖</div>
+        <h1 class="serif-font text-3xl font-bold text-pink-600 mb-2">Pemberitahuan Penting</h1>
+        <p class="text-stone-600 mb-6 text-sm">Halaman ini dilindungi secara khusus. Hanya boleh diakses oleh orang yang sangat istimewa.</p>
+        
+        <div class="space-y-4">
+            <p class="font-semibold text-pink-700 text-lg">Apakah nama Anda adalah</p>
+            <div class="serif-font text-2xl font-bold text-pink-800 tracking-wide bg-pink-100/50 py-3 rounded-2xl border border-pink-200">
+                Aisah Fadilah?
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 pt-4">
+                <button onclick="accessGranted()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transition duration-300 transform hover:scale-105 active:scale-95 text-sm">
+                    Ya, Benar sekali! 😍
+                </button>
+                <button onclick="wrongPerson()" id="btn-wrong" class="bg-stone-200 hover:bg-stone-300 text-stone-700 font-medium py-3 px-6 rounded-2xl transition duration-300 text-sm">
+                    Bukan/Salah orang
+                </button>
+            </div>
+            <p id="error-message" class="text-xs text-red-500 font-medium mt-2 hidden"></p>
+        </div>
+    </div>
+
+    <!-- TAMPILAN 2: Surat & Alasan Merayu (Utama) -->
+    <div id="screen-main" class="hidden w-full max-w-lg bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-pink-200 z-10 transition-all duration-700 opacity-0 transform translate-y-10">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase tracking-widest text-pink-500 font-bold bg-pink-100 px-3 py-1 rounded-full">Untuk Gadis Tercantik</span>
+            <h2 class="serif-font text-3xl sm:text-4xl font-bold text-pink-700 mt-3">Hai, Aisah Fadilah ✨</h2>
+            <p class="text-xs text-stone-500 mt-1">Ada pesan hangat yang sengaja dibuat hanya untukmu.</p>
+        </div>
+
+        <!-- Amplop Surat Interaktif -->
+        <div id="letter-box" class="bg-gradient-to-br from-pink-50 to-red-50/50 p-6 rounded-2xl border border-pink-100 relative mb-6 cursor-pointer hover:shadow-md transition duration-300 group" onclick="openLetter()">
+            <div id="letter-placeholder" class="text-center py-6">
+                <div class="text-5xl group-hover:scale-110 transition duration-300">✉️</div>
+                <p class="text-pink-600 font-bold text-sm mt-3">Klik untuk membuka surat rahasia</p>
+                <p class="text-xs text-stone-400 mt-1">Hanya dibaca saat kamu sedang tersenyum.</p>
+            </div>
+            
+            <div id="letter-content" class="hidden space-y-4 text-stone-700 text-sm leading-relaxed text-justify animate-fade-in">
+                <p class="serif-font italic font-semibold text-pink-600 text-base text-center">Dear Aisah,</p>
+                <p>
+                    Sejak pertama kali mengenalmu, ada sesuatu yang berbeda tentang dirimu yang selalu berhasil membuat hariku jadi lebih cerah. Lewat senyummu yang sederhana, duniaku rasanya berjalan jauh lebih menyenangkan.
+                </p>
+                <p>
+                    Aku tidak tahu bagaimana cara merangkai kata-kata puitis sehebat para sastrawan. Namun yang pasti, setiap kali memikirkanmu, ada rasa damai dan bahagia yang sulit digambarkan dengan kata-kata. Kamu itu istimewa, dengan segala keunikan dan kebaikan hatimu.
+                </p>
+                <p class="text-center font-bold text-pink-500 text-xs">Scroll ke bawah ya untuk kejutan kecil berikutnya... ❤️</p>
+            </div>
+        </div>
+
+        <!-- Mengapa Aisah Spesial -->
+        <div class="space-y-4 mb-8">
+            <h3 class="font-bold text-pink-700 text-sm uppercase tracking-wider text-center">3 Hal yang Membuatku Kagum Padamu:</h3>
+            
+            <div class="grid grid-cols-1 gap-3">
+                <div class="flex items-center gap-3 p-3 bg-white/70 rounded-xl border border-pink-100">
+                    <span class="text-xl">🌟</span>
+                    <div>
+                        <h4 class="font-bold text-xs text-stone-800">Senyummu yang Menenangkan</h4>
+                        <p class="text-xs text-stone-500">Mampu meredakan penat dan memberi energi positif instan.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-white/70 rounded-xl border border-pink-100">
+                    <span class="text-xl">🌸</span>
+                    <div>
+                        <h4 class="font-bold text-xs text-stone-800">Kebaikan & Ketulusanmu</h4>
+                        <p class="text-xs text-stone-500">Caramu peduli terhadapku selalu membuatku kagum.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-white/70 rounded-xl border border-pink-100">
+                    <span class="text-xl">🧁</span>
+                    <div>
+                        <h4 class="font-bold text-xs text-stone-800">Kehadiranmu yang Selalu Dinanti</h4>
+                        <p class="text-xs text-stone-500">Hari-hari terasa jauh lebih berwarna saat ada kamu di dalamnya.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ajakan ke Halaman Pertanyaan -->
+        <button onclick="goToQuestion()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3.5 rounded-2xl shadow-lg transition duration-300 flex items-center justify-center gap-2 text-sm">
+            <span>Lanjut ke Pertanyaan Penting</span>
+            <span>➡️</span>
+        </button>
+    </div>
+
+    <!-- TAMPILAN 3: Pertanyaan Romantis (Puncak) -->
+    <div id="screen-question" class="hidden w-full max-w-md bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-pink-200 text-center z-10 transition-all duration-700 opacity-0 transform translate-y-10">
+        <div class="text-6xl mb-4 animate-pulse">🧸</div>
+        <h2 class="serif-font text-2xl sm:text-3xl font-bold text-pink-700 mb-2">Satu Pertanyaan Jujur...</h2>
+        <p class="text-stone-600 text-sm mb-8 leading-relaxed">
+            Aisah Fadilah, maukah kamu menjadi bagian terpenting dari hari-hariku? Menulis cerita indah bersama-sama? 🥰
+        </p>
+
+        <!-- Tombol Pilihan -->
+        <div class="relative min-h-[120px] flex items-center justify-center gap-4">
+            <!-- Tombol YA -->
+            <button onclick="answerYes()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-8 rounded-2xl shadow-lg transition duration-300 transform hover:scale-110 active:scale-95 text-sm z-20">
+                Mau banget! 💖
+            </button>
+            
+            <!-- Tombol TIDAK (Yang akan menghindar) -->
+            <button id="btn-no" 
+                    onmouseover="dodgeButton()" 
+                    ontouchstart="dodgeButton(event)" 
+                    class="bg-stone-100 hover:bg-stone-200 text-stone-500 font-medium py-3.5 px-8 rounded-2xl transition duration-300 text-sm absolute">
+                Enggak dulu 😜
+            </button>
+        </div>
+        
+        <p class="text-xs text-stone-400 mt-6 italic">Petunjuk: Coba saja kalau bisa klik tombol "Enggak dulu"!</p>
+    </div>
+
+    <!-- TAMPILAN 4: Jawaban Sukses / Perayaan -->
+    <div id="screen-success" class="hidden w-full max-w-md bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-pink-200 text-center z-10 transition-all duration-700 opacity-0 transform translate-y-10">
+        <div class="text-7xl mb-4">🎉💐✨</div>
+        <h2 class="serif-font text-3xl font-bold text-emerald-600 mb-2">Yeay! Terima Kasih!</h2>
+        <p class="text-pink-600 font-bold text-lg mb-4">Aisah Fadilah ❤️</p>
+        
+        <p class="text-stone-600 text-sm leading-relaxed mb-6">
+            Keputusan terbaik! Hari ini menjadi salah satu hari paling membahagiakan bagiku. Terima kasih sudah  menerima niat tulus ini!
+        </p>
+
+        <!-- Pesan Harapan -->
+        <div class="bg-pink-50 p-4 rounded-2xl border border-pink-100 text-xs text-pink-800 leading-relaxed mb-6">
+            "Semoga kebersamaan kita membawa kebahagiaan, tawa, dan petualangan indah yang tak pernah habis. Janji ya untuk saling menjaga!"
+        </div>
+
+        <button onclick="resetWeb()" class="text-xs text-stone-400 hover:text-stone-600 underline">
+            Ulangi Kehangatan Ini
+        </button>
+    </div>
+
+    <!-- Script Logika Interaktif -->
+    <script>
+        // Memulai Musik Sintetis yang Indah (Web Audio API)
+        let audioCtx;
+        function playChime() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            const notes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C, E, G, C, E chord
+            notes.forEach((freq, index) => {
+                setTimeout(() => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+                    
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.5);
+                }, index * 200);
+            });
+        }
+
+        // Efek Hati Berjatuhan
+        function createHeart() {
+            const container = document.getElementById('heart-container');
+            const heart = document.createElement('div');
+            
+            // Variasi bentuk hati atau kelopak bunga
+            const shapes = ['❤️', '💖', '🌸', '✨', '💕'];
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            heart.innerText = randomShape;
+            heart.classList.add('heart-particle');
+            
+            // Atur properti acak
+            const size = Math.random() * 20 + 15; // 15px - 35px
+            heart.style.fontSize = size + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Durasi jatuh
+            const duration = Math.random() * 4 + 4; // 4s - 8s
+            heart.style.animationDuration = duration + 's';
+            
+            container.appendChild(heart);
+            
+            // Hapus elemen setelah selesai animasi
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Luncurkan efek hati secara teratur
+        setInterval(createHeart, 400);
+
+        // 1. Verifikasi Nama
+        let wrongAttempts = 0;
+        function wrongPerson() {
+            wrongAttempts++;
+            const btnWrong = document.getElementById('btn-wrong');
+            const errorMsg = document.getElementById('error-message');
+            errorMsg.classList.remove('hidden');
+
+            if (wrongAttempts === 1) {
+                errorMsg.innerText = "Yakin bukan Aisah? Coba periksa lagi hatinya.. 😢";
+            } else if (wrongAttempts === 2) {
+                errorMsg.innerText = "Ah, bohong ya! Kamu pasti Aisah Fadilah yang cantik itu!";
+                btnWrong.innerText = "Oke, saya Aisah 😅";
+            } else {
+                accessGranted(); // Paksa masuk jika berkali-kali menolak
+            }
+        }
+
+        function accessGranted() {
+            playChime();
+            const screenVerify = document.getElementById('screen-verify');
+            const screenMain = document.getElementById('screen-main');
+
+            // Transisi Cantik
+            screenVerify.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                screenVerify.classList.add('hidden');
+                screenMain.classList.remove('hidden');
+                setTimeout(() => {
+                    screenMain.classList.remove('opacity-0', 'translate-y-10');
+                }, 50);
+            }, 500);
+        }
+
+        // 2. Membuka Surat
+        function openLetter() {
+            playChime();
+            const placeholder = document.getElementById('letter-placeholder');
+            const content = document.getElementById('letter-content');
+            
+            placeholder.classList.add('hidden');
+            content.classList.remove('hidden');
+        }
+
+        // 3. Menuju Pertanyaan Romantis
+        function goToQuestion() {
+            playChime();
+            const screenMain = document.getElementById('screen-main');
+            const screenQuestion = document.getElementById('screen-question');
+
+            screenMain.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                screenMain.classList.add('hidden');
+                screenQuestion.classList.remove('hidden');
+                
+                // Set posisi awal tombol 'Tidak' agar berada di posisi yang benar
+                resetNoButtonPosition();
+                
+                setTimeout(() => {
+                    screenQuestion.classList.remove('opacity-0', 'translate-y-10');
+                }, 50);
+            }, 500);
+        }
+
+        // Atur posisi awal tombol NO agar bisa diakses
+        function resetNoButtonPosition() {
+            const btnNo = document.getElementById('btn-no');
+            btnNo.style.position = 'absolute';
+            btnNo.style.right = '40px';
+            btnNo.style.top = '50%';
+            btnNo.style.transform = 'translateY(-50%)';
+        }
+
+        // 4. Logika Tombol Menghindar (Dodge Button)
+        function dodgeButton(event) {
+            if (event) {
+                event.preventDefault(); // Mencegah klik tidak sengaja di layar sentuh
+            }
+            playChime();
+            const btnNo = document.getElementById('btn-no');
+            
+            // Hitung koordinat acak di dalam area kontainer pertanyaan
+            // Agar tombol tetap berada di dalam jangkauan layar tetapi jauh dari kursor/sentuhan
+            const containerWidth = window.innerWidth;
+            const containerHeight = window.innerHeight;
+            
+            const randomX = Math.random() * (containerWidth - 150) - (containerWidth / 2) + 75;
+            const randomY = Math.random() * (containerHeight - 150) - (containerHeight / 2) + 75;
+            
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = `calc(50% + ${randomX}px)`;
+            btnNo.style.top = `calc(50% + ${randomY}px)`;
+            btnNo.style.transform = 'translate(-50%, -50%)';
+        }
+
+        // 5. Menjawab YA (Perayaan)
+        function answerYes() {
+            // Mainkan melodi berkali-kali untuk pesta!
+            playChime();
+            setTimeout(playChime, 300);
+            setTimeout(playChime, 600);
+
+            const screenQuestion = document.getElementById('screen-question');
+            const screenSuccess = document.getElementById('screen-success');
+
+            screenQuestion.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                screenQuestion.classList.add('hidden');
+                screenSuccess.classList.remove('hidden');
+                
+                // Berondongan Hati Tambahan
+                for(let i = 0; i < 30; i++) {
+                    setTimeout(createHeart, i * 100);
+                }
+
+                setTimeout(() => {
+                    screenSuccess.classList.remove('opacity-0', 'translate-y-10');
+                }, 50);
+            }, 500);
+        }
+
+        // 6. Reset Web
+        function resetWeb() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
+
+```
